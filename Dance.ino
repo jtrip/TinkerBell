@@ -23,10 +23,17 @@ void setup() {
 
 // In typical easy Arduino fashion loop() is the main body, all other functions are called within here 
 void loop() {
+  
+  // The first thing I so it turn on the middle LED
+  // I was going to layer the loops but at this point it's totally unnecessary
+  
   LED2.setPixelColor(0,LED2.Color(255,215,0));
   LED2.show();
+  
+  // Inner Loop, why? I don't remember exactly, but I might go back to a layered loop
   while (true) {
     
+    // 
     basicFlutter();
     
     LED1.setPixelColor(0,LED2.Color(255,215,0));
@@ -71,6 +78,8 @@ void loop() {
   }
 }
 
+// This function blinks the outer LEDs at with delays that are relatively prime so they won't sync up after x loops
+// I think this creates a stronger flapping/fluttering illusion, maybe I'm crazy
 void basicFlutter() {
   for (int i=1; i < 80; i++) {
     LED1.setPixelColor(0,LED1.Color(155,115,0));
@@ -87,30 +96,35 @@ void basicFlutter() {
   }
 }
 
+// Fade as in start high and fade out, if the previous state is off then it's like a burst-fade.
 void fadeLED1() {
   for (int i = 255; i > 0; i=i-2) {
-    LED1.setPixelColor(0, LED1.Color(i,i,i));
+    LED1.setPixelColor(0, LED1.Color(i,i,i)); //white
     LED1.show();
     delay(10);
   }
 }
 
+// I should have made a function fadeLED(x) so I'm not repeating myself, but sometimes copy and paste is quicker :P
 void fadeLED2() {
   for (int i = 255; i > 0; i--) {
-    LED2.setPixelColor(0, LED2.Color(i,i,0));
+    LED2.setPixelColor(0, LED2.Color(i,i,0)); // yellow, not white
     LED2.show();
     delay(10);
   }
 }
 
+// same as the two above...
 void fadeLED3() {
   for (int i = 255; i > 0; i=i-2) {
-    LED3.setPixelColor(0, LED3.Color(i,i,i));
+    LED3.setPixelColor(0, LED3.Color(i,i,i)); //white.... maybe I should make it pass in the color as well as position
     LED3.show();
     delay(10);
   }
 }
 
+
+// Ramp as in start from 0 and slowly get brighter, notice we are going to yellow, not white (i,i,0)
 void rampLED2() {
   for (int i = 0; i < 255; i++) {
     LED2.setPixelColor(0, LED2.Color(i,i,0));
@@ -118,7 +132,6 @@ void rampLED2() {
     delay(10);
   }
 }
-
 
 
 void breathLED3() {
