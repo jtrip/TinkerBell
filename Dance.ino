@@ -33,7 +33,13 @@ void loop() {
   // Inner Loop, why? I don't remember exactly, but I might go back to a layered loop
   while (true) {
     
-    // 
+    // "THE DANCE"
+    // Basically calling a the functions defined below to perform the moves
+    // but also adding in delays and setting values between the functions to make sure it looks good
+    // The setPixelColor() and shows() could be avoided, but in the end it was easier.
+    // maybe it would be nice to make a simple function to set and show, pass in position and color, idk.
+    
+    
     basicFlutter();
     
     LED1.setPixelColor(0,LED2.Color(255,215,0));
@@ -77,6 +83,10 @@ void loop() {
     fadeLED3();
   }
 }
+
+
+// "THE MOVES"
+// Way too much repetition here but it was quicker to get done this way
 
 // This function blinks the outer LEDs at with delays that are relatively prime so they won't sync up after x loops
 // I think this creates a stronger flapping/fluttering illusion, maybe I'm crazy
@@ -133,10 +143,11 @@ void rampLED2() {
   }
 }
 
-
+// Breath is actually basically a ramp and fade, could be changed to call those
+// "Breathing" as made famous by the MacBooks' sleep light
 void breathLED3() {
  for (int i = 0; i < 255 ; i++) {
-    LED3.setPixelColor(0, LED3.Color(i,i,0));
+    LED3.setPixelColor(0, LED3.Color(i,i,0)); // yeller
     LED3.show();
     delay(10);
   }
@@ -146,10 +157,11 @@ void breathLED3() {
     delay(10);
   }
 }
-
+ 
+// Same as above, and yes, I should also make this so I can pass in the position and color
 void breathLED1() {
  for (int i; i < 255 ; i++) {
-    LED1.setPixelColor(0, LED1.Color(i,i,0));
+    LED1.setPixelColor(0, LED1.Color(i,i,0)); // yella
     LED1.show();
     delay(10);
   }
@@ -160,10 +172,11 @@ void breathLED1() {
   }
 }
 
+// Could also probably be depreciated by a function that takes position and color... needs cleverness 
 void breathBoth() {
   for (int i; i < 225 ; i++) {
-    LED1.setPixelColor(0, LED1.Color(i+15,i,0));
-    LED3.setPixelColor(0, LED1.Color(i+15,i,0));
+    LED1.setPixelColor(0, LED1.Color(i+15,i,0)); // yellow with a little extra red to make it warmer 
+    LED3.setPixelColor(0, LED1.Color(i+15,i,0)); 
     LED1.show();
     LED3.show();
     delay(10);
@@ -177,6 +190,7 @@ void breathBoth() {
   }
 }
 
+// Breathing (yellow) for the middle but keeping the outer LEDs yellow
 void breathLED2() {
   LED1.setPixelColor(0,LED1.Color(255,215,0));
   LED3.setPixelColor(0,LED3.Color(255,215,0));
@@ -194,6 +208,7 @@ void breathLED2() {
   }
 }
     
+// Breathing for only the middle LED, yellow
 void breathLED2solo() {
   for (int i; i < 255 ; i++) {
     LED2.setPixelColor(0, LED2.Color(i,i,0));
