@@ -6,6 +6,7 @@
 #define PIN3 10
 
 // Could probably do the same thing using one but I found it easier to expirament this way
+// if not changed to one strip then maybe this should be an array
 Adafruit_NeoPixel LED1 = Adafruit_NeoPixel(1, PIN1, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel LED2 = Adafruit_NeoPixel(1, PIN2, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel LED3 = Adafruit_NeoPixel(1, PIN3, NEO_GRB + NEO_KHZ800);
@@ -25,7 +26,6 @@ void setup() {
 void loop() {
   
   // The first thing I so it turn on the middle LED
-  // I was going to layer the loops but at this point it's totally unnecessary
   
   LED2.setPixelColor(0,LED2.Color(255,215,0));
   LED2.show();
